@@ -23,9 +23,6 @@ target_include_directories(dut PRIVATE obj_dir)
 target_compile_options(dut PRIVATE ${DUT_CXX_FLAGS})
 target_link_options(dut PRIVATE ${DUT_LINK_FLAGS})
 
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
-
 set(TARGET_NAME simple_clock)
 set(TB_CFLAGS -c -w -fcf-protection=none -mmanual-endbr -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -O1)
 set(TB_LINK_FLAGS -w -Wl,--gc-sections -O3)

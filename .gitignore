@@ -127,3 +127,4 @@ cmake-build-debug/
 
 gtkwave_setup.gtkw
 waveform.vcd
+.stamp.verilate
