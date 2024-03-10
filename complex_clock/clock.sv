@@ -1,21 +1,29 @@
-module clock#()
+/***************************************************
+* File: clock.sv
+* Author: Andrei Belov
+* Class: EE 271
+* Module: clock
+* Description: Clock circuit
+****************************************************/
+
+module clock
+    #(parameter BITWIDTH=8)
     (
         //////////// CLOCK //////////
         input MAX10_CLK2_50,
 
         //////////// SEG7 //////////
-        output[7:0] HEX0,
-        output[7:0] HEX1,
-        output[7:0] HEX2,
-        output[7:0] HEX3,
-        output[7:0] HEX4,
-        output[7:0] HEX5,
+        output[BITWIDTH-1:0] HEX0,
+        output[BITWIDTH-1:0] HEX1,
+        output[BITWIDTH-1:0] HEX2,
+        output[BITWIDTH-1:0] HEX3,
+        output[BITWIDTH-1:0] HEX4,
+        output[BITWIDTH-1:0] HEX5,
 
         //////////// KEY //////////
         // verilator lint_off UNUSED
         input[1:0] KEY
         // verilator lint_on UNUSED
-
     );
 
 //=======================================================

@@ -1,3 +1,11 @@
+# Modelsim files
+transcript
+rtl_work/
+modelsim.ini
+*.cr.mti
+*.mpf
+*.wlf
+
 # Created by .ignore support plugin (hsz.mobi)
 ### C template
 # Prerequisites
@@ -56,7 +64,6 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
-Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
@@ -108,6 +115,7 @@ obj_dir/
 
 # IntelliJ
 /out/
+.build
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -122,9 +130,13 @@ crashlytics-build.properties
 fabric.properties
 
 cmake-build-debug/
-!/complex_clock/Makefile
-!/simple_clock/Makefile
 
 gtkwave_setup.gtkw
 waveform.vcd
 .stamp.verilate
+/uart/verilog/rtl_work/
+/uart/verilog/modelsim.ini
+/uart/verilog/transcript
+/uart/verilog/uart_tb.cr.mti
+/uart/verilog/uart_tb.mpf
+/uart/verilog/vsim.wlf

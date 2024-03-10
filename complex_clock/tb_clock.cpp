@@ -1,5 +1,15 @@
-// Verilator Example
-// Norbertas Kremeris 2021
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tb_clock.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Norbertas Kremeris <marvin@42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 17:03:58 by abelov            #+#    #+#             */
+/*   Updated: 2024/03/10 17:03:59 by abelov           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cstdlib>
 #include <iostream>
 #include <verilated.h>
@@ -16,6 +26,7 @@ int main(int argc, char** argv, char** env) {
 
     Verilated::traceEverOn(true);
     auto *m_trace = new VerilatedVcdC;
+
     dut->trace(m_trace, 5);
     m_trace->open(OUTPUT_FILE);
 
