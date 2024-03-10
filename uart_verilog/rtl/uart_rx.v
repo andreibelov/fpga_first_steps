@@ -1,16 +1,23 @@
-//////////////////////////////////////////////////////////////////////
-// File Downloaded from http://www.nandland.com
-//////////////////////////////////////////////////////////////////////
-// This file contains the UART Receiver.    This receiver is able to
-// receive 8 bits of serial data, one start bit, one stop bit,
-// and no parity bit.    When receive is complete o_rx_dv will be
-// driven high for one clock cycle.
-// 
+/***************************************************
+* File: uart_rx.v
+* Author: nandland.com
+* Contributor: Andrei Belov
+* Class: EE 271
+* Module: uart_rx
+* Description: UART Receiver.
+*       This file contains the UART Receiver.
+*       This receiver is able to receive 8 bits
+*       of serial data, one start bit, one stop bit,
+*       and no parity bit.
+*       When receive is complete o_rx_dv will be
+*       driven high for one clock cycle.
+* File Downloaded from https://nandland.com
+****************************************************/
+
 // Set Parameter CLKS_PER_BIT as follows:
 // CLKS_PER_BIT = (Frequency of i_Clock)/(Frequency of UART)
 // Example: 10 MHz Clock, 115200 baud UART
 // (10000000)/(115200) = 87
-
 module uart_rx
     #(parameter CLKS_PER_BIT)
     (
@@ -35,6 +42,9 @@ module uart_rx
     reg r_Rx_DV = 0;
     reg[2:0] r_SM_Main = 0;
 
+    assign o_Rx_DV = r_Rx_DV;
+    assign o_Rx_Byte = r_Rx_Byte;
+
     // Purpose: Double-register the incoming data.
     // This allows it to be used in the UART RX Clock Domain.
     // (It removes problems caused by metastability)
@@ -43,7 +53,6 @@ module uart_rx
             r_Rx_Data_R <= i_Rx_Serial;
             r_Rx_Data <= r_Rx_Data_R;
         end
-
 
     // Purpose: Control RX state machine
     always @(posedge i_Clock)
@@ -142,8 +151,4 @@ module uart_rx
 
             endcase
         end
-
-    assign o_Rx_DV = r_Rx_DV;
-    assign o_Rx_Byte = r_Rx_Byte;
-
 endmodule // uart_rx

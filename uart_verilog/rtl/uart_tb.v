@@ -1,15 +1,17 @@
-//////////////////////////////////////////////////////////////////////
-// File Downloaded from http://www.nandland.com
-//////////////////////////////////////////////////////////////////////
+/***************************************************
+* File: uart_tb.v
+* Author: nandland.com
+* Contributor: Andrei Belov
+* Class: EE 271
+* Module: uart_tb
+* Description: UART testbench
+* File Downloaded from https://nandland.com
+****************************************************/
 
+`timescale 1ns/10ps
 // This testbench will exercise both the UART Tx and Rx.
 // It sends out byte 0xAB over the transmitter
 // It then exercises the receive by receiving byte 0x3F
-`timescale 1ns/10ps
-
-`include "uart_tx.v"
-`include "uart_rx.v"
-
 module uart_tb();
 
     // Testbench uses a 10 MHz clock
@@ -33,7 +35,6 @@ module uart_tb();
         input[7:0] i_Data;
         integer ii;
         begin
-
             // Send Start Bit
             r_Rx_Serial <= 1'b0;
             #(c_BIT_PERIOD);
@@ -52,21 +53,21 @@ module uart_tb();
         end
     endtask // UART_WRITE_BYTE
 
-    uart_rx#(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_RX_INST
-                                            (.i_Clock(r_Clock),
-                                                .i_Rx_Serial(r_Rx_Serial),
-                                                .o_Rx_DV(),
-                                                .o_Rx_Byte(w_Rx_Byte)
-                                            );
+    uart_rx#(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_RX_INST(
+        .i_Clock(r_Clock),
+        .i_Rx_Serial(r_Rx_Serial),
+        .o_Rx_DV(),
+        .o_Rx_Byte(w_Rx_Byte)
+    );
 
-    uart_tx#(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_TX_INST
-                                            (.i_Clock(r_Clock),
-                                                .i_Tx_DV(r_Tx_DV),
-                                                .i_Tx_Byte(r_Tx_Byte),
-                                                .o_Tx_Active(),
-                                                .o_Tx_Serial(w_Tx_Serial),
-                                                .o_Tx_Done(w_Tx_Done)
-                                            );
+    uart_tx#(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_TX_INST(
+        .i_Clock(r_Clock),
+        .i_Tx_DV(r_Tx_DV),
+        .i_Tx_Byte(r_Tx_Byte),
+        .o_Tx_Active(),
+        .o_Tx_Serial(w_Tx_Serial),
+        .o_Tx_Done(w_Tx_Done)
+    );
 
     always
         #(c_CLOCK_PERIOD_NS/2) r_Clock <= !r_Clock;
@@ -97,7 +98,6 @@ module uart_tb();
                 $display("Test Passed - Correct Byte Received");
             else
                 $display("Test Failed - Incorrect Byte Received");
-            $stop;              // and stop.
+            $stop; // and stop.
         end
-
 endmodule // uart_tb
