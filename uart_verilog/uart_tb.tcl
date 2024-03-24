@@ -11,6 +11,7 @@ vmap work rtl_work
 if { [file exists uart_tb.mpf] } {
 	puts "Project 'uart_tb' already exists opening"
 	project open uart_tb
+	project compileall
 } else {
 	puts "Creating new project library 'rtl_work'"
 	# Create a new project
@@ -19,7 +20,7 @@ if { [file exists uart_tb.mpf] } {
 	project addfile rtl/uart_rx.v
 	project addfile rtl/uart_tx.v
 	project addfile rtl/uart_tb.v
-	project compile all
+	project compileall
 }
 
 # Compile the project
